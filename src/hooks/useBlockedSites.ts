@@ -14,15 +14,31 @@ const useBlockedSites = (): UseBlockedSitesProps => {
 
   const addSiteToBlockedList = (newSite: string): void => {
     if (newSite.trim() !== "") {
-      if (!blockedSites.includes(newSite)) {
-        setBlockedSites((prevSites) => [...prevSites, newSite]);
+      const domainRegex = /^[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$/;
 
-        localStorage.setItem(
-          "blockedSites",
-          JSON.stringify([...blockedSites, newSite])
-        );
+      if (domainRegex.test(newSite)) {
+        try {
+          const url = new URL(`https://${newSite}`);
+          const domain = url.hostname;
+
+          if (!blockedSites.includes(domain)) {
+            setBlockedSites((prevSites) => [...prevSites, domain]);
+
+            localStorage.setItem(
+              "blockedSites",
+              JSON.stringify([...blockedSites, domain])
+            );
+          } else {
+            console.warn(`Domain ${domain} exists already in the blocked list.`);
+          }
+        } catch (error) {
+          const invalidURLError = error as {
+            message: string;
+          };
+          console.error("URL invalid:", invalidURLError.message);
+        }
       } else {
-        console.warn(`${newSite} it's already on the blocked sites list.`);
+        console.warn("Invalid domain format. Use something.something.");
       }
     }
   };

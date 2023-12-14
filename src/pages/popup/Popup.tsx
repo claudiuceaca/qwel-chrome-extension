@@ -6,7 +6,7 @@ import InputPopup from "./components/InputPopup";
 import { UseBlockedSitesProps } from "../../types";
 
 const Popup: React.FC = () => {
-  const { blockedSites, addSiteToBlockedList }:
+  const { blockedSites, addSiteToBlockedList, removeSiteFromBlockedList }:
     UseBlockedSitesProps = useBlockedSites();
 
   return (
@@ -18,6 +18,7 @@ const Popup: React.FC = () => {
             <BlockedSite
               key={index}
               site={site}
+              onRemove={() => removeSiteFromBlockedList(index)}
             />
           ))}
 

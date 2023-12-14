@@ -64,6 +64,10 @@ button:hover {
   width: max(300px, 100%);
 }
 
+.button-remove {
+  background-color: #4caf50;
+}
+
 .blocked-site {
   display: flex;
   justify-content: space-between;

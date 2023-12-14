@@ -23,9 +23,19 @@ const useBlockedSites = (): UseBlockedSitesProps => {
     }
   };
 
+  const removeSiteFromBlockedList = (indexToRemove: number): void => {
+    const updatedSites = blockedSites.filter(
+      (_, index) => index !== indexToRemove
+    );
+    setBlockedSites(updatedSites);
+
+    localStorage.setItem("blockedSites", JSON.stringify(updatedSites));
+  };
+
   return {
     blockedSites,
     addSiteToBlockedList,
+    removeSiteFromBlockedList,
   };
 };
 

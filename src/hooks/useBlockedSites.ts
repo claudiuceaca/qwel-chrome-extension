@@ -14,12 +14,16 @@ const useBlockedSites = (): UseBlockedSitesProps => {
 
   const addSiteToBlockedList = (newSite: string): void => {
     if (newSite.trim() !== "") {
-      setBlockedSites((prevSites) => [...prevSites, newSite]);
+      if (!blockedSites.includes(newSite)) {
+        setBlockedSites((prevSites) => [...prevSites, newSite]);
 
-      localStorage.setItem(
-        "blockedSites",
-        JSON.stringify([...blockedSites, newSite])
-      );
+        localStorage.setItem(
+          "blockedSites",
+          JSON.stringify([...blockedSites, newSite])
+        );
+      } else {
+        console.warn(`${newSite} it's already on the blocked sites list.`);
+      }
     }
   };
 

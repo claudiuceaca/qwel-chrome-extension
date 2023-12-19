@@ -29,7 +29,7 @@ const useBlockedSites = (): UseBlockedSitesProps => {
               JSON.stringify([...blockedSites, domain])
             );
           } else {
-            console.warn(`Domain ${domain} exists already in the blocked list.`);
+            console.log(`Domain ${domain} exists already in the blocked list.`);
           }
         } catch (error) {
           const invalidURLError = error as {
@@ -38,7 +38,7 @@ const useBlockedSites = (): UseBlockedSitesProps => {
           console.error("URL invalid:", invalidURLError.message);
         }
       } else {
-        console.warn("Invalid domain format. Use something.something.");
+        console.log("Invalid domain format. Use something.something.");
       }
     }
   };

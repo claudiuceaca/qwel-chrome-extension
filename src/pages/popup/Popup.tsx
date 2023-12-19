@@ -1,31 +1,41 @@
-import React from "react";
-import BlockedSite from "./components/BlockedSite";
-import useBlockedSites from "../../hooks/useBlockedSites";
+import React, { useState } from "react";
 import "./Popup.css";
-import InputPopup from "./components/InputPopup";
-import { UseBlockedSitesProps } from "../../types";
+import BlockedBundlesTab from "./components/tabs/BlockedBundlesTab";
+import BlockedWebsitesTab from "./components/tabs/BlockedWebsitesTab";
+import BlockedWordsTab from "./components/tabs/BlockedWordsTab";
 
 const Popup: React.FC = () => {
-  const { blockedSites, addSiteToBlockedList, removeSiteFromBlockedList }:
-    UseBlockedSitesProps = useBlockedSites();
+  const [activeTab, setActiveTab] = useState("tab1");
+
+  const handleTabClick = (tabId: string) => {
+    setActiveTab(tabId);
+  };
 
   return (
     <div className="popup-container">
-      <h2>Black Sited List</h2>
-      <div className="blocked-sites-list">
-        <ul>
-          {blockedSites.map((site: string, index: number) => (
-            <BlockedSite
-              key={index}
-              site={site}
-              onRemove={() => removeSiteFromBlockedList(index)}
-            />
-          ))}
+      <nav>
+        <button
+          className={`button-tab ${activeTab === "tab1" ? "tab-active" : ""}`}
+          onClick={() => handleTabClick("tab1")}>Websites</button>
+        <button
+          className={`button-tab ${activeTab === "tab2" ? "tab-active" : ""}`}
+          onClick={() => handleTabClick("tab2")}>Bundle</button>
+        <button
+          className={`button-tab ${activeTab === "tab3" ? "tab-active" : ""}`}
+          onClick={() => handleTabClick("tab3")}>Words</button>
+      </nav>
 
-        </ul>
-      </div>
+      {activeTab === "tab1" && (
+        <BlockedWebsitesTab />
+      )}
 
-      <InputPopup addSiteToBlockedList={addSiteToBlockedList} />
+      {activeTab === "tab2" && (
+        <BlockedBundlesTab />
+      )}
+
+      {activeTab === "tab3" && (
+        <BlockedWordsTab />
+      )}
     </div>
   );
 };

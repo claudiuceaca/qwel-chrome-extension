@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import "./Popup.css";
-import BlockedBundlesTab from "./components/tabs/BlockedBundlesTab";
-import BlockedWebsitesTab from "./components/tabs/BlockedWebsitesTab";
-import BlockedWordsTab from "./components/tabs/BlockedWordsTab";
+import { BundleTab, WebsiteTab, WordsTab } from "./components/tabs";
+
+const tabData = [
+  { id: "tab1", label: "Websites", component: <WebsiteTab /> },
+  { id: "tab2", label: "Bundle", component: <BundleTab /> },
+  { id: "tab3", label: "Words", component: <WordsTab /> },
+];
 
 const Popup: React.FC = () => {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -14,28 +18,22 @@ const Popup: React.FC = () => {
   return (
     <div className="popup-container">
       <nav>
-        <button
-          className={`button-tab ${activeTab === "tab1" ? "tab-active" : ""}`}
-          onClick={() => handleTabClick("tab1")}>Websites</button>
-        <button
-          className={`button-tab ${activeTab === "tab2" ? "tab-active" : ""}`}
-          onClick={() => handleTabClick("tab2")}>Bundle</button>
-        <button
-          className={`button-tab ${activeTab === "tab3" ? "tab-active" : ""}`}
-          onClick={() => handleTabClick("tab3")}>Words</button>
+        {tabData.map(({ id, label }) => (
+          <button
+            key={id}
+            className={`button-tab ${activeTab === id ? "tab-active" : ""}`}
+            onClick={() => handleTabClick(id)}
+          >
+            {label}
+          </button>
+        ))}
       </nav>
 
-      {activeTab === "tab1" && (
-        <BlockedWebsitesTab />
-      )}
-
-      {activeTab === "tab2" && (
-        <BlockedBundlesTab />
-      )}
-
-      {activeTab === "tab3" && (
-        <BlockedWordsTab />
-      )}
+      {tabData.map(({ id, component }) => (
+        <div key={id} style={{ display: activeTab === id ? "block" : "none" }}>
+          {component}
+        </div>
+      ))}
     </div>
   );
 };

@@ -1,0 +1,15 @@
+{
+    "manifest_version": 3,
+    "name": "Block Websites",
+    "author":"Claudiu Ceaca",
+    "version": "1.0",
+    "action": {
+      "default_popup": "src/pages/popup/Popup.html",
+      "default_icon": {
+        "16": "assets/qwellogo.png",
+        "48": "assets/qwellogo.png",
+        "128": "assets/qwellogo.png"
+      }
+    }
+}
+  

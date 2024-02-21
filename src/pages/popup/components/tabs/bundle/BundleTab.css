@@ -1,0 +1,50 @@
+.bundle-tab-title {
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.bundles-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.bundle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 47%;
+  height: 150px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: rgba(115, 209, 115, 0.622);
+  border: 1px solid rgb(77, 177, 77);
+  color: rgb(250, 250, 250);
+}
+
+.blocked-bundle {
+  background-color: #ee561027;
+  border: 1px solid #ee5610;
+}
+
+.bundle-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.bundle-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.bundle-item {
+  font-size: 15px;
+  font-weight: 500;
+}
